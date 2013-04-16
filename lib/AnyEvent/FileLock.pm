@@ -1,6 +1,6 @@
 package AnyEvent::FileLock;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use strict;
 use warnings;
@@ -79,7 +79,7 @@ sub _acquire_lock {
         require Fcntl::Packer;
         my %flock = (type => $self->{operation});
         $flock{$_} = $self->{"lock_$_"} for qw(whence start len);
-        $ok = fcntl($self->{fh}, Fcntl::F_SETLK, Fcntl::Packer::pack_fcntl_lock(\%flock));
+        $ok = fcntl($self->{fh}, Fcntl::F_SETLK, Fcntl::Packer::pack_fcntl_flock(\%flock));
     }
     if ($ok) {
         $self->{user_cb}->($self->{fh});
@@ -204,6 +204,9 @@ locked. See L<fcntl(2)> for the details.
 =head1 SEE ALSO
 
 L<AnyEvent>.
+
+L<perlfunc/flock>, L<perlfunc/fcntl>, L<fcntl(2)>, L<Fcntl>,
+L<Fcntl::Packer>.
 
 =head1 AUTHOR
 

@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               AnyEvent-FileLock
-version:            0.01
+version:            0.02
 abstract:           Lock files asynchronously
 author:
     - Salvador Fandino <sfandino@yahoo.com>
